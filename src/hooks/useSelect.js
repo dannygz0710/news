@@ -7,13 +7,13 @@ import Select from '@material-ui/core/Select';
 
 
 const useSelect = (opciones) => {
-  //state inicial
-  const [state, actualizarState] = useState('');
-  const SelectNoticias = () => (
-    <FormControl variant="filled" fullWidth>
-      <InputLabel htmlFor="filled-age-native-simple">Seleccione Categoria</InputLabel>
+  
+  const [state, setState] = useState('');
+  const SelectNews = () => (
+    <FormControl variant="standard" fullWidth>
+      <InputLabel htmlFor="filled-age-native-simple">Select a Category</InputLabel>
       <Select
-        onChange={e => actualizarState(e.target.value)}
+        onChange={e => setState(e.target.value)}
         value={state}
       >
         {opciones.map(opcion => (
@@ -23,7 +23,7 @@ const useSelect = (opciones) => {
     </FormControl>
 
   )
-  return [state, SelectNoticias];
+  return [state, SelectNews];
 
 }
 

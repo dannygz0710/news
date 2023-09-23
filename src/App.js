@@ -1,42 +1,29 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import Header from './components/Header';
-import Formulario from './components/Formulario';
-import Listado from './components/Listado'
-import Container from '@material-ui/core/Container';
-
+import React, { Fragment, useState, useEffect } from "react";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import List from "./components/List";
+import Container from "@material-ui/core/Container";
+import { getNews } from "./helpers/getNews";
 
 function App() {
+  const [category, setCategory] = useState("");
+  const [news, saveNews] = useState([]);
 
-  // definir la categoria
-  const [categoria, guardarCategoria] = useState('');
-  const [noticias, guardarNoticias] = useState([]);
-  console.log(categoria)
-
+  const getNewsApi = async (category) => {
+    const news = await getNews(category);
+    saveNews(news);
+  };
   useEffect(() => {
-    const consultarApi = async () => {
-      const url = `https://newsapi.org/v2/top-headlines?country=ar&category=${categoria}&apiKey=34466eddc4cb4dbfbc0627342cee27a4`;
-
-      const respuesta = await fetch(url);
-      const noticias = await respuesta.json();
-      guardarNoticias(noticias.articles);
-    
-    }
-    consultarApi();
-
-  }, [categoria]);
+    getNewsApi(category);
+  }, [category]);
 
   return (
     <Fragment>
       <Header />
       <Container fixed>
-        <Formulario
-          guardarCategoria={guardarCategoria}
-        />
-        <Listado
-          noticias={noticias}
-        />
+        <Form setCategory={setCategory} />
+        <List news={news} />
       </Container>
-
     </Fragment>
   );
 }

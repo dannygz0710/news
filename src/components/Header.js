@@ -9,8 +9,11 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(() => ({
     root: {
         padding: '20px',
-        textAlign:'center',
+        
     },
+    Typography: {
+     margin: 'auto',
+    }
 
 }));
 
@@ -21,8 +24,8 @@ const Header = () => {
         
             <AppBar  position="static" >
                 <Toolbar className={classes.root}>
-                    <Typography variant="h3" >
-                        Buscador De Noticias
+                    <Typography variant="h3" className={classes.Typography} >
+                        News Search
           </Typography>
                 </Toolbar>
             </AppBar>
